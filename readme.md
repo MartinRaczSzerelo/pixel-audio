@@ -38,7 +38,7 @@ To decode audio, run <code>decode-main.bat</code>. You'll be prompted to choose 
 Licensed under LGPL v2.1
 
 ## Note
-This project is in its early stages, so contributing would be a big help. At the moment, it only supports Windows 10 and above, since it includes a full build of FFmpeg from BtbN.
+This project is in its early stages, so having a feedback at Issue would be a big help. At the moment, it only supports Windows 10 and above, since it includes a full build of FFmpeg from BtbN.
 
 ## Contact:
 Developed by Martin Rácz  

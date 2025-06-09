@@ -16,7 +16,7 @@ later decoded back into usable audio, leveraging modern image and video compress
 
 A <code>.pxa</code> (Pixel Audio) file is a standard ZIP archive containing encoded image chunks/video ("00001.png", "00002.webp", "audio.webm", etc.)
 
-## Getting Started
+## Usage
 To encode audio, run <code>encode-main.bat</code> and you'll be prompted to encode in a mode. There are 4 modes at the moment:
 - 8 and 16 bit PNG
 - WebP

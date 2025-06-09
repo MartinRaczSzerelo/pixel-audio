@@ -41,5 +41,5 @@ Licensed under LGPL v2.1
 This project is in its early stages, so contributing would be a big help. At the moment, it only supports Windows 10 and above, since it includes a full build of FFmpeg from BtbN.
 
 ## Contact:
-Developed by Martin Rácz
+Developed by Martin Rácz  
 GitHub: https://github.com/MartinRaczSzerelo/pixel-audio

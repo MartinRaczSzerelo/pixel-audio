@@ -1,7 +1,7 @@
 <div style="display:flex;justify-content:center">
   <img height="200" width="200" src="pixel-audio-logo.png"/>
 </div>
-<h1 align="center">Pixel Audio (VEDA)</h1>
+## Pixel Audio (VEDA)
 
 Visual Encoding and Decoding for Audio (VEDA) is a framework to store audio in visual formats 
 such as PNG, WebP or AV1. It enables audio data to be encoded into visual media and 

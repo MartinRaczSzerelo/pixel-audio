@@ -1,5 +1,5 @@
-<div style="width:100%;justify-content:center">
-  <img height="200" src="pixel-audio-logo.png"/>
+<div style="display:flex;justify-content:center">
+  <img height="200" width="200" src="pixel-audio-logo.png"/>
 </div>
 <h1 align="center">Pixel Audio (VEDA)</h1>
 

@@ -25,7 +25,7 @@ To encode audio, run <code>encode-main.bat</code> and you'll be prompted to enco
 All modes store audio as unsigned 8-bit mono at 48 kHz, except for 16-bit PNG.
 - For lossless compression, use PNG.
 - Use AV1 for smoother audio. (mostly recommended for long term use)
-- Use WebM as an alternative.
+- Use WebP as an alternative.
 
 Note: in AV1, the higher frequencies might get cut off in smaller regions of audio, if lower frequencies dominate more. (listen to example files)
 

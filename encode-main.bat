@@ -14,8 +14,7 @@ REM version 2.1 of the License, or (at your option) any later version.
 
 echo 1=png16 (lossless, 16-bit)
 echo 2=png8 (lossless, 8-bit)
-echo 3=webp (lossy, 8-bit)
-echo 4=av1 (lossy, 8-bit)
+echo 3=av1 (lossy, 8-bit)
 
 set /p mode="Choose encoding mode: "
 
@@ -31,16 +30,8 @@ if "%mode%"=="2" (
 )
 if "%mode%"=="3" (
   pushd bin
-  call encode-webp-mode.bat
-  popd
-)
-if "%mode%"=="4" (
-  pushd bin
   call encode-av1-mode.bat
   popd
 )
-if exist "bin\audio-av1.pxa" move "bin\audio-av1.pxa" .
-if exist "bin\audio-png8.pxa" move "bin\audio-png8.pxa" .
-if exist "bin\audio-png16.pxa" move "bin\audio-png16.pxa" .
-if exist "bin\audio-webp.pxa" move "bin\audio-webp.pxa" .
+
 pause

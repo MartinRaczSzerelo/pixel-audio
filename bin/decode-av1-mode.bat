@@ -16,14 +16,12 @@ setlocal enabledelayedexpansion
 
 set /p in="Provide path to file: "
 
-"7z/7za.exe" x %in% -oaudio
+"7z/7za.exe" x %in% -o.
 
-echo Reading and decoding AV1 frames...
-"ffmpeg\ffmpeg.exe" -v quiet -i "audio\audio.webm" -f rawvideo -pix_fmt gray "tmp.pcm"
+echo Reading and decoding AV1 chunks...
 
-if exist out-av1.wav del out-av1.wav
-"ffmpeg\ffmpeg.exe" -v quiet -f u8 -ar 48k -ac 1 -i tmp.pcm -c:a pcm_u8 out-av1.wav
-rmdir /s /q "audio"
-del tmp.pcm
+"ffmpeg\ffmpeg.exe" -v quiet -i audio.mkv -f rawvideo -pix_fmt gray - | "ffmpeg\ffmpeg.exe" -y -v quiet -f u8 -ar 48k -ac 1 -i - -c:a copy out-av1.wav
+del audio.mkv
+move out-av1.wav ..
 
-echo Decoding complete!
+echo Decoding complete

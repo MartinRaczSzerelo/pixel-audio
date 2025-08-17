@@ -16,27 +16,12 @@ setlocal enabledelayedexpansion
 
 set /p in="Provide path to file: "
 
-"7z/7za.exe" x %in% -ochunks
+"7z/7za.exe" x %in% -o.
 
 echo Reading and decoding PNG chunks...
 
-cd chunks
-for %%f in (*.png) do (
-    "../ffmpeg/ffmpeg.exe" -v quiet -i %%f -f rawvideo -pix_fmt gray16be "%%~nf.pcm"
-)
-del *.png
+"ffmpeg\ffmpeg.exe" -v quiet -i audio.mkv -f rawvideo -pix_fmt gray16le - | "ffmpeg\ffmpeg.exe" -y -v quiet -f s16le -ar 48k -ac 1 -i - -c:a copy out-png16.wav
+del audio.mkv
+move out-png16.wav ..
 
-echo Connecting the chunks...
-if exist full.pcm del full.pcm
-for %%f in (*.pcm) do (
-    type "%%f" >> ../full.pcm
-)
-del *.pcm
-
-cd ..
-del out-png16.wav
-"ffmpeg/ffmpeg.exe" -v quiet -f s16be -ar 48k -ac 1 -i full.pcm -c:a pcm_s16le out-png16.wav
-rmdir /s /q "chunks"
-del full.pcm
-
-echo Decoding complete!
+echo Decoding complete

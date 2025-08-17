@@ -15,14 +15,8 @@ REM version 2.1 of the License, or (at your option) any later version.
 setlocal enabledelayedexpansion
 
 if not exist "ffmpeg\ffmpeg.exe" (
-    echo [X] Error: ffmpeg.exe not found in \ffmpeg folder
+    echo [X] Error: ffmpeg.exe not found in ffmpeg folder
     echo     Download from: https://ffmpeg.org
-    pause
-    exit /b
-)
-
-if not exist "splitbin.exe" (
-    echo [X] Error: splitbin.exe not found
     pause
     exit /b
 )
@@ -40,56 +34,23 @@ if not exist "%input_file%" (
     goto get_input
 )
 
-if exist audio-png8.mra del audio-png8.mra
-
 echo.
+set "frame=80x60"
+set /p "frame=Specify frame size (default is 80x60): "
+if not defined frame set "frame=80x60"
+
 echo Starting conversion...
 echo ----------------------
 
-echo [1/3] Converting to raw audio...
-"ffmpeg\ffmpeg.exe" -v error -i "%input_file%" -c:a pcm_u8 -ar 48000 -ac 1 -f u8 "tmp.pcm"
+echo [1/2] Converting audio to a PNG sequence...
+"ffmpeg\ffmpeg.exe" -v error -i "%input_file%" -c:a pcm_u8 -ar 48k -ac 1 -f u8 - | "ffmpeg\ffmpeg.exe" -y -v error -f rawvideo -pix_fmt gray -s %frame% -i - -c:v png -pix_fmt gray audio.mkv
 if errorlevel 1 (
     echo [X] Error: Could not convert audio
-    goto cleanup
 )
 
-echo [2/3] Splitting audio...
-splitbin.exe "tmp.pcm" 131072
-if errorlevel 1 (
-    echo [X] Error: Chunking failed
-    goto cleanup
-)
-
-echo [3/3] Converting to PNG chunks...
-set chunk_count=0
-for %%f in (*.pcm) do (
-    "ffmpeg\ffmpeg.exe" -v error -f rawvideo -pix_fmt gray -s 512x256 -i "%%f" -pix_fmt gray "%%~nf.png"
-    if !errorlevel! equ 0 (
-        del "%%f"
-        set /a chunk_count+=1
-        <nul set /p="."
-    )
-)
-
-:cleanup
-if exist "tmp.pcm" del "tmp.pcm"
-if exist "tmp.png" del "tmp.png"
-
-echo ----------------------
-if %chunk_count% gtr 0 (
-    echo Success! Created %chunk_count% PNG chunks:
-    dir /b *.png
-) else (
-    echo [X] Conversion failed - no chunks created
-    echo Possible reasons:
-    echo 1. Corrupt input file
-    echo 2. Unsupported audio format
-    echo 3. Output folder not writable
-)
-
-echo Packaging chunks...
-"7z/7za.exe" a -tzip audio-png8.pxa *.png
-del *.png
-del *.pcm
+echo [2/2] Packaging chunks...
+"7z/7za.exe" a -tzip audio-png8.pxa audio.mkv
 echo Encoding complete!
-
+del audio.mkv
+move audio-png8.pxa ..
+cd ..

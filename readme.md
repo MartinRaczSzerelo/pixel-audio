@@ -38,7 +38,7 @@ Licensed under LGPL v2.1
 I provided a small piece of hand crafted music for testing Pixel Audio. The encoded files are not optimized and they use the default values. When encoding, I highly recommend experimenting with different values, since those could give better results. The source file is licensed under Creative Commons Attribution 4.0. You are free to share, copy, distribute and modify it, even for commercial purposes, but only if you give credit.
 
 ## Note
-This project is in its early stages, so having a feedback at Issue would be a big help. At the moment, it only supports Windows 10 and above, since it includes a full build of FFmpeg from BtbN.
+This project is in its early stages, so having a feedback at Issue would be a big help. At the moment, it only supports Windows 10 and above.
 
 ## Contact:
 Developed by Martin Rácz  
